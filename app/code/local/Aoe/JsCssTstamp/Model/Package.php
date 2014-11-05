@@ -32,6 +32,10 @@ class Aoe_JsCssTstamp_Model_Package extends Mage_Core_Model_Design_Package {
 		$this->storageJs = Mage::getStoreConfig('dev/js/storage');
 
 		$this->addTstampToAssets = Mage::getStoreConfig('dev/css/addTstampToAssets');
+
+		if (is_callable('parent::__construct')) {
+			parent::__construct();
+		}
 	}
 
 	/**
