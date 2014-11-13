@@ -150,7 +150,10 @@ class Aoe_JsCssTstamp_Model_Package extends Mage_Core_Model_Design_Package {
 	 * @return string
 	 */
 	public function beforeMergeJs($file, $contents) {
-		$contents = "\n\n/* FILE: " . basename($file) . " */\n" . $contents;
+
+		// In some cases, browsers will choke if the component files don't end
+		// with a statement ending, so we'll force one here to be safe.
+		$contents = ";\n\n/* FILE: " . basename($file) . " */\n" . $contents;
 		return $contents;
 	}
 
@@ -161,12 +164,9 @@ class Aoe_JsCssTstamp_Model_Package extends Mage_Core_Model_Design_Package {
 	 * @param string $contents
 	 * @return string
 	 */
-	public function beforeMergeJs($file, $contents) {
-
-		// In some cases, browsers will choke if the component files don't end
-		// with a statement ending, so we'll force one here to be safe.
-		$contents = ";\n\n/* FILE: " . basename($file) . " */\n" . $contents;
-		return $contents;
+	public function beforeMergeCss($file, $contents) {
+		$contents = "\n\n/* FILE: " . basename($file) . " */\n" . $contents;
+		return parent::beforeMergeCss($file, $contents);
 	}
 
 	/**
